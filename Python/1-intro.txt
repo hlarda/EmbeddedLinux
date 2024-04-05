@@ -1,0 +1,130 @@
+# Python is a high-level, interpreted programming language.
+# It is known for its simplicity and readability.
+# Python uses indentation to define code blocks, making it easy to read and understand.
+
+# Python supports multiple programming paradigms, including procedural, object-oriented, and functional programming.
+
+# Python has a large standard library that provides a wide range of modules and functions for various tasks.
+
+# Python is widely used in web development, data analysis, artificial intelligence, and scientific computing.
+
+# Python uses dynamic typing, which means you don't need to declare variable types explicitly.
+
+# Python supports both single-line and multi-line comments, which are useful for documenting code.
+
+# Python has a rich ecosystem of third-party libraries and frameworks that extend its capabilities.
+
+# Python is cross-platform, meaning it can run on different operating systems such as Windows, macOS, and Linux.
+
+# Python has a REPL (Read-Eval-Print Loop) that allows you to interactively execute Python code.
+
+# Python has a strong and supportive community, with many online resources and forums available for learning and getting help.
+
+# To get started with Python, you need to install the Python interpreter and a code editor or IDE (Integrated Development Environment).
+
+# Once you have Python installed, you can write Python code in a .py file and execute it using the Python interpreter.
+
+# Python has a rich set of built-in data types, including strings, numbers, lists, tuples, dictionaries, and sets.
+
+# Python provides powerful control flow statements, such as if-else, for loops, while loops, and try-except blocks.
+
+# Python supports file handling, allowing you to read from and write to files.
+
+# Python has extensive documentation, including the official Python documentation and various online tutorials and guides.
+
+# Python encourages code reusability and modularity through the use of functions and modules.
+
+# Python supports object-oriented programming, allowing you to define classes and create objects with attributes and methods.
+
+# Python has a garbage collector that automatically manages memory allocation and deallocation.
+
+# Python supports exception handling, allowing you to catch and handle errors gracefully.
+
+# Python has a rich set of built-in functions and methods that make common programming tasks easier.
+
+# Python supports regular expressions, which are powerful tools for pattern matching and text manipulation.
+
+# Python provides tools for testing and debugging, such as the built-in unittest module and the pdb debugger.
+
+# Python has a built-in package manager called pip, which makes it easy to install and manage third-party libraries.
+
+# Python is constantly evolving, with new versions and features being released regularly.
+
+# Python is a versatile language that can be used for a wide range of applications, from simple scripts to complex web applications.
+
+# Python is a great language for beginners, as it has a gentle learning curve and a friendly syntax.
+
+# Python is open-source, meaning its source code is freely available and can be modified and distributed.
+
+# Python has a Zen of Python, a set of guiding principles that promote readability and simplicity in code.
+
+# Python is fun to learn and use, and it has a vibrant and enthusiastic community of developers.
+
+# Happy coding with Python!
+
+#############################################
+# interpreted (executed line by line)not compiled
+# importance of python?
+    for example used for scrypting and automation for code documentation
+                testing and debugging
+#interpreter
+        compiler >> 
+        byte code >> python -m dis file.py  
+        virtual machine conected to library modules >> depends on os
+#to execute file easily >> use shebang
+    add bin file at the beginng of yout files(#!/c/msys64/ucrt64/bin/Python)
+    -to know python path >> which Python
+    -to make it executable >> chmod u+x file.py 
+    then run it >> ./file.py
+#''' for multi line comment but better use select +ctrl+\
+
+#string 
+    print("vfdfg")
+    print('vfdfg')
+    print('''vfdfg''')
+
+#what is the difference between static data typed and dynamic data type?
+static: type known in the compile time (c, cpp, java)
+dynamic: type associated with runtime values (ruby, python,  php, javaScript)
+python has dynamic typing for variables
+    x=5
+    print(type(x))
+    print(id(x))
+    x="m7md"
+    print(type(x))
+    print(id(x))
+
+    note from the id they are totally differenrt variables as the garbage collector deleted the old one.
+
+#Comma operator
+    x,y,z=1,2,3
+    x,_,z=1,2,3     >> _ = ignore
+
+#data types
+    text: str
+    numeric: int, float,  complex (each variable is a class u can .anyFunction to use part of it)
+    sequence:   ls=[12,1.5,"hkkj",[5,66]]   OR  ls=List(12,1.5,"hkkj",[5,66])
+                tuple() is a const list
+    boolean: x=True, x=False    or  x=bool(True) 
+                False >> None   0   ""string    ()tuple  {}set  []list
+
+    #lab
+        x = int(input("enter num"))
+        print(x)
+
+#list
+    slicing:    ls=[12,1.5,"hkkj",[5,66]]
+                print(ls[0])                    print(ls[0:3])>>[includded:execluded]   
+                print(ls[-1])>>recursively      print(ls[2:])>>till the end
+                print(ls[1:5:2])>>[start:end:step]
+    
+    list is mutable data type>>#########################
+
+#tuple  is immutable unchangeable ordered cant be overwritten
+
+#dictionary
+    dic = {
+        "key": "value"
+    }
+
+    value: of any type(another dictionary, list, string, aaaa)
