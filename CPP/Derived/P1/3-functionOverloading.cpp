@@ -4,7 +4,7 @@
 **2. the function name should be the same
 **3. the difference should be in the number of arguments or the type of arguments
 **4. the default arguments are not considered as a difference
-**5. they are totally different functions in asembly code
+**5. they are totally different functions in asembly code (addii, adddd)
 **/
 int add(int a, int b) {
     return a + b;
