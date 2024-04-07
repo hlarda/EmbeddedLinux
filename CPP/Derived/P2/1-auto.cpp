@@ -1,5 +1,6 @@
 #include <iostream>
 #include <typeinfo>
+using namespace std;
 int main() {
     auto x = 10;  // x is deduced as int
     auto y = 3.14;  // y is deduced as double
@@ -7,10 +8,14 @@ int main() {
 
     /*auto is not smart enough to deduce const int. u must explicitly specify it.*/
     const int   a = 10;
-    const auto  b = a;  // b is deduced as const int
-    auto        &c = a;  // b is deduced as int&
-    auto        ptr = &a;  // b is deduced as const int*
-    auto        intializerList = { 1, 2, 3 };  // b is deduced as std::initializer_list<int>
+    auto        notSmart=a;     //  int 
+    const auto  b = a;          //  const int
+    /*
+    !with reference and pointer auto is smart enough to know if it is const or not*/
+    auto        &c = a;         //  const int &
+    auto        ptr = &a;       //  const int *
+
+    auto        intializerList = { 1, 2, 3 };  // std::initializer_list<int>
 
     
 
@@ -22,12 +27,21 @@ int main() {
     std::cout << "c: " << c << ", type: " << typeid(c).name() << std::endl;
     std::cout << "ptr: " << ptr << ", type: " << typeid(ptr).name() << std::endl;
 
-    /*types of intilization*/
-    int x = 4;
-    int y = { 4 };
-    int z{ 4 };
+    /*forms of intilization*/
+    int s = 4;
+    int q = { 4 };
+    int v{ 4 };
     int w = int{ 4 };
-    int v = int(4);
+    int p = int(4);
     
+    //* auto can be used in lamda function  as a return type and as a parameter*//
+    //* without specifying the return type *//
+    auto add = [](auto x, auto y) {
+        return x + y;
+    };
+
+    std::cout << typeid(add(1, 2)).name() << std::endl;
+    std::cout << typeid(add(2.5, 2)).name() << std::endl;
+    std::cout << typeid(add(1, 2.5F)).name() << std::endl;
     return 0;
 }
