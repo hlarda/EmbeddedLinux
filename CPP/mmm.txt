@@ -1,1 +1,11 @@
 cppcheck
+
+?how the size of of enum class is only one char in the following code although it holds three numbers of size int 
+enum class Colorrr : char { RED, GREEN, BLUE };
+cout << sizeof(Colorrr) << endl;  // 1
+cout << sizeof(Colorr) << endl;   // 4 
+
+?how to write static enum
+static enum class koko{
+    
+};
