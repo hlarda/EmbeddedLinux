@@ -2,6 +2,8 @@
 using namespace std;
 /*
 * with delegation we cant intilize with intilizer list in the constructor
+delegation: calling constructors by eachother
+? the called constructor is called before the caller constructor body execution
 */
 class delegation
 {
