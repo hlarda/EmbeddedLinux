@@ -34,21 +34,20 @@ int main(int argc, char const *argv[])
     !to prevent narrowing conversions. 
     If you try to perform a narrowing conversion with list initialization, the code will not compile.
     */
-    //*double o = 3.14;
-    //*int p{o};  // Error: narrowing conversion from double to int
+    double o = 3.14;
+    int p{o};  // warning: narrowing conversion from double to int
 
     /*
     ?zero initialization
     */
    int u=0;
    int v{}; //best practice
-   int w(); // vexig parse error. the compiler deals eith it as a function prototype.
+   int w(); // vexig parse error. the compiler deals with it as a function prototype.
 
     /*
     ! take care of the intialization form with vector
     */
     vector<int> vec1{2,10};
-    /*this is direct constructor calling */
-    vector<int> vec2(2, 10); // 2 elements of value 10
+    vector<int> vec2(2, 10); //*this is direct constructor calling means initilize with 2 elements of 10
     return 0;
 }
