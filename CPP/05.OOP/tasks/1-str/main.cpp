@@ -18,17 +18,18 @@ int main(int argc, char const *argv[])
     cout << str4.length() << endl;
     cout << str4.size() << endl;
 
-    cout<<endl;
-    str str5 = str4 + str1;
-    str5.print();
-    cout<<endl;
-    str str6 = str4 + "world";
-    str6.print();
-    cout<<endl;
-    str6.append(str1);
-    str6.append("world");
-    str5.print();
-    cout<<endl;
-    str6.print();
+    str str5 = "str5";
+    str str6 = "str6";
+    str str7 = str5 + str6;
+    str7.print();
+
+    str7.append(str6);
+    str7.print();
+
+    str7.append("str8");
+    str7.print();
+
+    str7 = str7 + "str9";
+    str7.print();
     return 0;
 }
