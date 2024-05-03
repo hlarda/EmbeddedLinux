@@ -141,3 +141,77 @@ UUID=44A0358DA0358708  /home/hala/windows-b         ntfs3   defaults,noatime,nof
    ```bash
    cat /etc/apt/sources.list
    ```
+
+## DISPLAY
+
+`DISPLAY` is an environment variable that specifies the X server to connect to.
+
+  ```bash
+  $ echo $DISPLAY
+  :0
+  $ printenv DISPLAY
+  :0
+  ```
+
+`DISPLAY` = hostname:displaynumber.screennumber.
+
+**hostname:**  
+This is the name of the computer where the X server runs. An omitted hostname means the localhost.  
+**displaynumber:**  
+This allows you to differentiate between various display servers running on the same machine. If omitted, the default is :0.
+**screennumber:**  
+This allows you to differentiate between various physical screens. If omitted, the default is .0.
+
+## Wayland VS Xorg
+
+X11 and Wayland are Display communication protocols(display servers).
+
+they sit between your physical display and the applications, managing how software draws things on your screen, and how it handles user input.
+
+| Xorg                                                             | Wayland                                                         |
+| -----------------------------------------------------------------| ----------------------------------------------------------------|
+|older, more established and used by default in many distributions.|newer, simpler and aims to replace Xorg.                         |
+|design is quite old, and carries a lot of legacy code.            |modern design, which make it faster and more efficient.          |
+|more complex and harder to maintain adding new features.          |easier to maintain.                                              |
+|doesn't have good support for features like touchscreens.         |better support for input devices and high-resolution displays.   |
+|network-transparent protocol, you can run an application on one machine and display its output on another machine over the network. |not network-transparent. However, it's worth noting as it's possible to achieve similar functionality using other technologies, such as remote desktop protocols or streaming the entire desktop over the network.|
+
+**The architecture**
+![img](x-architecture.png)                                          ![img](wayland-architecture.png)
+
+**a simple workflow where a user moves the mouse to click a button in an application window:**
+| Xorg                                                             | Wayland                                                         |
+| -----------------------------------------------------------------| ----------------------------------------------------------------|
+|1. The mouse sends input to the Xorg server.|1. The mouse sends input to the Wayland compositor.|
+|2. Xorg determines which window the mouse event belongs to and sends the event to the application managing that window.|2. The compositor determines which window the mouse event belongs to and sends the event directly to the application managing that window.|
+|3. The application processes the event and decides that it needs to change the color of the button because it's being clicked.|3. The application processes the event and decides that it needs to change the color of the button because it's being clicked.|
+|4. **The application sends a request to Xorg** to redraw the button with the new color.|4. **The application redraws the button itself** and sends the updated image for that part of the window to the compositor.|
+|5. Xorg sends the redraw request to the graphics driver, which updates the display.|5. The compositor sends the updated image to the graphics driver, which updates the display.|
+
+### Compotors' roles
+
+| Xorg                                                             | Wayland                                                         |
+| -----------------------------------------------------------------| ----------------------------------------------------------------|
+|an optional component that can be added to enhance the visual experience. It's responsible for adding effects like transparency, shadows, and animations. The compositor in Xorg takes the windows drawn by different applications and combines them into a final image to display.| plays a much more central role. It's an integral part of the system, not an optional add-on. The Wayland compositor takes on the roles of both the display server (like Xorg in the X11 system) and the compositor.|
+|| communicates directly with the applications and the graphics hardware managing input devices (e.g., keyboards, mice) and deciding which window is in focus.|
+|takes the windows drawn by different applications and combines them into a final image to display.|Applications draw their own windows and then send the final image to the compositor. The compositor then combines these images into a final image to display on the screen.|
+
+**let's consider a scenario where a user has multiple windows open and wants to switch from one window to another.**
+| Xorg                                                             | Wayland                                                         |
+| -----------------------------------------------------------------| ----------------------------------------------------------------|
+|1. The user presses Alt+Tab on their keyboard to switch windows.|1. The user presses Alt+Tab on their keyboard to switch windows.|
+|2. The Xorg server receives this input and sends it to the window manager.|2. The Wayland compositor receives this input directly.|
+|3. The window manager decides which window should be focused next based on its policies.|3. The compositor decides which window should be focused next based on its policies (since the compositor also acts as the window manager in Wayland).|
+|4. The window manager sends a request to the Xorg server to change the focus to the next window.|4. The compositor directly handles the change of focus without needing to communicate with a separate server.|
+|5. If a compositor is present, it may add visual effects during this switch, like fading out the current window and fading in the next one.|5. The compositor may add visual effects during this switch, like fading out the current window and fading in the next one.|
+|6. The Xorg server communicates with the graphics hardware to update the display.|6. The compositor communicates with the graphics hardware to update the display.|
+
+In this scenario, the compositor in Wayland takes on the role of both the display server and the window manager, handling input, managing window focus, and rendering visual effects. In contrast, with Xorg, these roles are typically split between the Xorg server, a window manager, and optionally a compositor.
+
+   ```bash
+   #to determine which display server our system is using
+    $ printenv XDG_SESSION_TYPE
+    x11
+    $ echo $XDG_SESSION_TYPE
+    x11
+  ```
