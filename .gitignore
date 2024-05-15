@@ -1,3 +1,4 @@
 .vscode/*
 *.exe
 CPP/Derived/P1/*.exe
+Linux/*.out
